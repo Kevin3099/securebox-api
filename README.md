@@ -51,7 +51,7 @@ This project is being built from scratch to:
 
 This project is built as a self-teaching tool. I’ll update this section with insights, challenges, and what I’ve learned at each stage.
 
-# Stage 1 
+### Stage 1 
 Refreshed my knowledge on GIT, how to set up VS Code for GoLang and in general refreshing my knowledge on project setup.
 
 ---
