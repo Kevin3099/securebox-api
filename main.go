@@ -8,10 +8,12 @@ import (
 )
 
 var numbers = []int{1, 2, 3, 4, 5}
+var secrets = map[string]string{} // New map to store secrets
 
 func main() {
 	http.HandleFunc("/health", healthHandler)
 	http.HandleFunc("/numbers", numbersHandler)
+	http.HandleFunc("secrets", secretsHandler)
 
 	fmt.Println("SecureBox API is running on port 8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
@@ -85,4 +87,40 @@ func deleteNumber(w http.ResponseWriter, r *http.Request) {
 
 	numbers = append(numbers[:index], numbers[index+1:]...)
 	w.Write([]byte("Number deleted"))
+}
+
+// Secrets Handler
+
+func secretsHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		getSecrets(w, r)
+	case http.MethodPost:
+		postSecret(w, r)
+	default:
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+	}
+}
+
+func getSecrets(w http.ResponseWriter, r *http.Request) {
+	json.NewEncoder(w).Encode(secrets)
+}
+
+func postSecret(w http.ResponseWriter, r *http.Request) {
+	var input struct {
+		Key   string `json:"key"`
+		Value string `json:"value"`
+	}
+	if err := json.NewDecoder(r.Body).Decode(&input); err != nil {
+		http.Error(w, "Invalid input", http.StatusBadRequest)
+		return
+	}
+
+	if input.Key == "" || input.Value == "" {
+		http.Error(w, "Key and value cannot be empty", http.StatusBadRequest)
+		return
+	}
+
+	secrets[input.Key] = input.Value
+	w.Write([]byte("Secret added"))
 }
