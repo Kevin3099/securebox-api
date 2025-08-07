@@ -37,7 +37,7 @@ This project is being built from scratch to:
 | Phase | Description |
 |-------|-------------|
 | ✅ Phase 0 | GitHub repo + README + project goals |
-| 🔜 Phase 1 | Basic Go API + `/health` endpoint |
+| 🔜 Phase 1 | Basic Go API + GET, UPDATE, DELETE |
 | 🔜 Phase 2 | Secure secret storage (in-memory) |
 | 🔜 Phase 3 | Dockerfile + Containerization |
 | 🔜 Phase 4 | Optional database/file persistence |
