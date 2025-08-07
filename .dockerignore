@@ -1,0 +1,21 @@
+# Binaries
+securebox
+*.exe
+*.out
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Docs and license
+README.md
+LICENSE
+
+# IDE/editor stuff
+.vscode
+.idea
+*.swp
